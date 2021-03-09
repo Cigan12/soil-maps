@@ -15,6 +15,8 @@ interface IMapProps {
     onCreated: (map: LeafletMap) => void;
 }
 
+// TODO: Линейка, лупа, информация, поиск, работа с таблицами гис вычисления, вычисление биоклиматичского потенциала
+
 export const Map: React.FC<IMapProps> = ({ onCreated }) => {
     const MarkerIcon = Leaflet.icon({
         iconUrl: '/logo192.png',
@@ -24,7 +26,7 @@ export const Map: React.FC<IMapProps> = ({ onCreated }) => {
     return (
         <MapContainer
             center={[55.034242, 82.928757]}
-            zoom={19}
+            zoom={17}
             className="Map"
             whenCreated={onCreated}
         >
@@ -33,7 +35,7 @@ export const Map: React.FC<IMapProps> = ({ onCreated }) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker position={[55.034242, 82.928757]} icon={MarkerIcon}>
-                <Popup>Маркер на нашем институте</Popup>
+                <Popup>Маркер на нашем Университете</Popup>
             </Marker>
             <Rectangle
                 bounds={URectangle.coords}
