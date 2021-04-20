@@ -10,12 +10,14 @@ import {
 } from 'react-leaflet';
 import './Map.styles.scss';
 import { URectangle } from '../../utils/Rectangles.util';
+import { Measure } from '../Mesure/Mesure.component';
 
+// Wrap our new variable and assign it to the one we used before. The rest of the codes stays the same.
 interface IMapProps {
     onCreated: (map: LeafletMap) => void;
 }
 
-// TODO: Линейка, лупа, информация, поиск, работа с таблицами гис вычисления, вычисление биоклиматичского потенциала
+// TODO: Линейка, информация, поиск, работа с таблицами гис вычисления, вычисление биоклиматичского потенциала
 
 export const Map: React.FC<IMapProps> = ({ onCreated }) => {
     const MarkerIcon = Leaflet.icon({
@@ -29,6 +31,7 @@ export const Map: React.FC<IMapProps> = ({ onCreated }) => {
             zoom={17}
             className="Map"
             whenCreated={onCreated}
+            attributionControl={true}
         >
             <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -37,6 +40,7 @@ export const Map: React.FC<IMapProps> = ({ onCreated }) => {
             <Marker position={[55.034242, 82.928757]} icon={MarkerIcon}>
                 <Popup>Маркер на нашем Университете</Popup>
             </Marker>
+            <Measure />
             <Rectangle
                 bounds={URectangle.coords}
                 pathOptions={{ color: '#FF0000' }}

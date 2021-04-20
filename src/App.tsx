@@ -6,9 +6,9 @@ import { Map as LeafletMap } from 'leaflet';
 
 export const App: React.FC = () => {
     const [map, setMap] = useState<null | LeafletMap>(null);
+
     return (
         <div className="App">
-            <Map onCreated={setMap} />
             <div
                 className="Layers"
                 onClick={() =>
@@ -23,6 +23,11 @@ export const App: React.FC = () => {
                     {URectangle.coords[0][0]} {URectangle.coords[0][1]}
                 </p>
             </div>
+            <Map
+                onCreated={(map) => {
+                    setMap(map);
+                }}
+            />
         </div>
     );
 };

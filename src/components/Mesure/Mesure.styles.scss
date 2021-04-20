@@ -1,0 +1,17 @@
+.measure {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    z-index: 900;
+}
+
+.mesure_active {
+    border: 3px solid green;
+}
+
+.measureIcon {
+    max-width: 30px;
+}
