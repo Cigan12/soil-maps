@@ -10,10 +10,15 @@ export const APIPostCreateArea = async (body: FormData) => {
         'areas/create-area',
         body
     );
-    return r.data;
+    return r;
 };
 
 export const APIGetAreas = async () => {
     const r: AxiosResponse<TAPIGetAreasResponse> = await API.get('areas');
     return r.data;
+};
+
+export const APIDeleteArea = async (id: number) => {
+    const r: AxiosResponse = await API.delete(`areas/${id}`);
+    return r;
 };

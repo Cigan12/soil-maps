@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TStore } from '../../store';
 import { fetchAreasAction } from '../../reducers/Areas/Areas.reducer';
 
-export const AdminPage: React.FC = () => {
+export const AdminSoilsPage: React.FC = () => {
     const [modal, setModal] = useState(false);
     const state = useSelector((state: TStore) => state);
     const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export const AdminPage: React.FC = () => {
             <Navbar bg="primary" variant="dark">
                 <Navbar.Brand href="#home">Панель администратора </Navbar.Brand>
                 <Button variant="secondary" onClick={toggleModal}>
-                    Добавить участок
+                    Добавить почвы
                 </Button>
             </Navbar>
             <Table striped bordered hover>
@@ -83,7 +83,7 @@ export const AdminPage: React.FC = () => {
                 <Modal.Dialog className={SAdmin.modal}>
                     <Form onSubmit={handleSubmit}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Загрузить участки</Modal.Title>
+                            <Modal.Title>Загрузить почвы</Modal.Title>
                         </Modal.Header>
 
                         <Modal.Body>

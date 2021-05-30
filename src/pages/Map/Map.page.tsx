@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Map } from '../../components/Map/Map.component';
 import { Map as LeafletMap } from 'leaflet';
-import { URectangle } from '../../utils/Rectangles.util';
 import './Map.styles.scss';
-import { Card, CardColumns, CardGroup, Navbar } from 'react-bootstrap';
+import { Card, CardColumns, Navbar } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { TStore } from '../../store';
 
 export const MapPage: React.FC = () => {
+    const state = useSelector((state: TStore) => state);
+
     const [map, setMap] = useState<null | LeafletMap>(null);
     return (
         <div>
@@ -13,135 +16,42 @@ export const MapPage: React.FC = () => {
                 <Navbar.Brand href="#home">Карта слоев почвы</Navbar.Brand>
             </Navbar>
             <div className="main-map">
-                <div
-                    className="Layers"
-                    onClick={() =>
-                        map?.panTo([
-                            (URectangle.coords[1][0] +
-                                URectangle.coords[0][0]) /
-                                2,
-                            (URectangle.coords[1][1] +
-                                URectangle.coords[0][1]) /
-                                2,
-                        ])
-                    }
-                >
+                <div className="Layers">
                     <Navbar expand="sm" variant="light" bg="light">
-                        <Navbar.Brand href="#">Слой университета</Navbar.Brand>
+                        <Navbar.Brand href="#">Участки</Navbar.Brand>
                     </Navbar>
                     <CardColumns className="mt-3">
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Body>
-                                <Card.Title>{URectangle.title}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">
-                                    Тестовый слой на университете
-                                </Card.Subtitle>
-                                <Card.Text>
-                                    {URectangle.coords[0][0]}{' '}
-                                    {URectangle.coords[0][1]}
-                                </Card.Text>
-                                <Card.Link
-                                    onClick={() =>
-                                        map?.panTo([
-                                            (URectangle.coords[1][0] +
-                                                URectangle.coords[0][0]) /
-                                                2,
-                                            (URectangle.coords[1][1] +
-                                                URectangle.coords[0][1]) /
-                                                2,
-                                        ])
-                                    }
-                                >
-                                    Показать на карте
-                                </Card.Link>
-                            </Card.Body>
-                        </Card>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Body>
-                                <Card.Title>{URectangle.title}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">
-                                    Тестовый слой на университете
-                                </Card.Subtitle>
-                                <Card.Text>
-                                    {URectangle.coords[0][0]}{' '}
-                                    {URectangle.coords[0][1]}
-                                </Card.Text>
-                                <Card.Link
-                                    onClick={() =>
-                                        map?.panTo([
-                                            (URectangle.coords[1][0] +
-                                                URectangle.coords[0][0]) /
-                                                2,
-                                            (URectangle.coords[1][1] +
-                                                URectangle.coords[0][1]) /
-                                                2,
-                                        ])
-                                    }
-                                >
-                                    Показать на карте
-                                </Card.Link>
-                            </Card.Body>
-                        </Card>
+                        {state.AreasReducer.areas.map((area) => (
+                            <Card key={area.id} style={{ width: '18rem' }}>
+                                <Card.Body>
+                                    <Card.Title>{area.name}</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">
+                                        {area.properties.culture}
+                                    </Card.Subtitle>
+                                    <Card.Text>
+                                        {`${area.geometry.coordinates[0][0].toFixed(
+                                            2
+                                        )} ${area.geometry.coordinates[0][1].toFixed(
+                                            2
+                                        )}`}
+                                    </Card.Text>
+                                    <Card.Link
+                                        onClick={() => {
+                                            map?.panTo(
+                                                area.geometry.coordinates[0]
+                                            );
+                                        }}
+                                    >
+                                        Показать на карте
+                                    </Card.Link>
+                                </Card.Body>
+                            </Card>
+                        ))}
                     </CardColumns>
                     <Navbar expand="sm" variant="light" bg="light">
-                        <Navbar.Brand href="#">
-                            Другой слой университета
-                        </Navbar.Brand>
+                        <Navbar.Brand href="#">Слой почв</Navbar.Brand>
                     </Navbar>
-                    <CardColumns className="mt-3">
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Body>
-                                <Card.Title>{URectangle.title}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">
-                                    Тестовый слой на университете
-                                </Card.Subtitle>
-                                <Card.Text>
-                                    {URectangle.coords[0][0]}{' '}
-                                    {URectangle.coords[0][1]}
-                                </Card.Text>
-                                <Card.Link
-                                    onClick={() =>
-                                        map?.panTo([
-                                            (URectangle.coords[1][0] +
-                                                URectangle.coords[0][0]) /
-                                                2,
-                                            (URectangle.coords[1][1] +
-                                                URectangle.coords[0][1]) /
-                                                2,
-                                        ])
-                                    }
-                                >
-                                    Показать на карте
-                                </Card.Link>
-                            </Card.Body>
-                        </Card>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Body>
-                                <Card.Title>{URectangle.title}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">
-                                    Тестовый слой на университете
-                                </Card.Subtitle>
-                                <Card.Text>
-                                    {URectangle.coords[0][0]}{' '}
-                                    {URectangle.coords[0][1]}
-                                </Card.Text>
-                                <Card.Link
-                                    onClick={() =>
-                                        map?.panTo([
-                                            (URectangle.coords[1][0] +
-                                                URectangle.coords[0][0]) /
-                                                2,
-                                            (URectangle.coords[1][1] +
-                                                URectangle.coords[0][1]) /
-                                                2,
-                                        ])
-                                    }
-                                >
-                                    Показать на карте
-                                </Card.Link>
-                            </Card.Body>
-                        </Card>
-                    </CardColumns>
+                    <CardColumns className="mt-3"></CardColumns>
                 </div>
                 <Map
                     onCreated={(map) => {
