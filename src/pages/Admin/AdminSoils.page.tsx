@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Button, Form, Modal, Navbar, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SAdmin from './Admin.module.scss';
-import {
-    APIDeleteArea,
-    APIPostCreateArea,
-} from '../../api/AreaAPI/AreaAPI.util';
 import { useDispatch, useSelector } from 'react-redux';
 import { TStore } from '../../store';
 import { fetchAreasAction } from '../../reducers/Areas/Areas.reducer';
+import {
+    APIDeleteSoil,
+    APIPostCreateSoil,
+} from '../../api/SoilsAPI/SoilsAPI.util';
 
 export const AdminSoilsPage: React.FC = () => {
     const [modal, setModal] = useState(false);
@@ -18,7 +18,7 @@ export const AdminSoilsPage: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        const r = await APIPostCreateArea(formData);
+        const r = await APIPostCreateSoil(formData);
         if (r.status >= 200) {
             dispatch(fetchAreasAction());
         }
@@ -30,7 +30,7 @@ export const AdminSoilsPage: React.FC = () => {
 
     const handleDelete = async (id: number) => {
         try {
-            const r = await APIDeleteArea(id);
+            const r = await APIDeleteSoil(id);
             if (r.status === 200) {
                 dispatch(fetchAreasAction());
             }
@@ -60,16 +60,16 @@ export const AdminSoilsPage: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {state.AreasReducer.areas.map((area, index) => (
-                        <tr key={area.id}>
+                    {state.SoilsReducer.soils.map((soil, index) => (
+                        <tr key={soil.id}>
                             <td>{index + 1}</td>
-                            <td>{area.name}</td>
-                            <td>{area.properties.culture}</td>
+                            <td>{soil.name}</td>
+                            <td>{soil.properties.PODTYP}</td>
                             <td>
                                 <Button
                                     onClick={handleDelete.bind(
                                         undefined,
-                                        area.id
+                                        soil.id
                                     )}
                                 >
                                     Удалить
