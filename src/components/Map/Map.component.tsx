@@ -17,6 +17,7 @@ export const Map: React.FC<IMapProps> = ({ onCreated }) => {
 
     return (
         <MapContainer
+            center={[55.034242, 82.928757]}
             zoom={17}
             className="Map"
             whenCreated={onCreated}
@@ -42,6 +43,22 @@ export const Map: React.FC<IMapProps> = ({ onCreated }) => {
                             {`${area.geometry.coordinates[0][0].toFixed(
                                 2
                             )} ${area.geometry.coordinates[0][1].toFixed(2)}`}
+                        </Popup>
+                    </Polygon>
+                ))}
+            {!!state.SoilsReducer.soils.length &&
+                state.SoilsReducer.soils.map((soil) => (
+                    <Polygon
+                        key={soil.id}
+                        pathOptions={{ color: 'yellow' }}
+                        positions={soil.geometry.coordinates}
+                    >
+                        <Popup>
+                            {soil.properties.PODTYP}
+                            <br />
+                            {`${soil.geometry.coordinates[0][0].toFixed(
+                                2
+                            )} ${soil.geometry.coordinates[0][1].toFixed(2)}`}
                         </Popup>
                     </Polygon>
                 ))}

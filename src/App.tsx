@@ -7,11 +7,13 @@ import { Provider, useDispatch } from 'react-redux';
 import { store } from './store';
 import { fetchAreasAction } from './reducers/Areas/Areas.reducer';
 import { AdminSoilsPage } from './pages/Admin/AdminSoils.page';
+import { fetchSoilsAction } from './reducers/Soils/Soils.reducer';
 
 const UnderRedux: React.FC = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchAreasAction());
+        dispatch(fetchSoilsAction());
     }, [dispatch]);
     return (
         <Router>

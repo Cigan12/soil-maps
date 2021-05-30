@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Modal, Navbar, Table } from 'react-bootstrap';
+import { Button, Form, Modal, Nav, Navbar, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SAdmin from './Admin.module.scss';
 import {
@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { TStore } from '../../store';
 import { fetchAreasAction } from '../../reducers/Areas/Areas.reducer';
+import { Link } from 'react-router-dom';
 
 export const AdminPage: React.FC = () => {
     const [modal, setModal] = useState(false);
@@ -46,6 +47,12 @@ export const AdminPage: React.FC = () => {
         <div className="admin-page">
             <Navbar bg="primary" variant="dark">
                 <Navbar.Brand href="#home">Панель администратора </Navbar.Brand>
+                <Link className={SAdmin.navlink} to="/admin">
+                    Участки
+                </Link>
+                <Link className={SAdmin.navlink} to="/admin/soils">
+                    Почвы
+                </Link>
                 <Button variant="secondary" onClick={toggleModal}>
                     Добавить участок
                 </Button>

@@ -51,7 +51,34 @@ export const MapPage: React.FC = () => {
                     <Navbar expand="sm" variant="light" bg="light">
                         <Navbar.Brand href="#">Слой почв</Navbar.Brand>
                     </Navbar>
-                    <CardColumns className="mt-3"></CardColumns>
+                    <CardColumns className="mt-3">
+                        {state.SoilsReducer.soils.map((soil) => (
+                            <Card key={soil.id} style={{ width: '18rem' }}>
+                                <Card.Body>
+                                    <Card.Title>{soil.name}</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">
+                                        {soil.properties.LOCATION}
+                                    </Card.Subtitle>
+                                    <Card.Text>
+                                        {`${soil.geometry.coordinates[0][0].toFixed(
+                                            2
+                                        )} ${soil.geometry.coordinates[0][1].toFixed(
+                                            2
+                                        )}`}
+                                    </Card.Text>
+                                    <Card.Link
+                                        onClick={() => {
+                                            map?.panTo(
+                                                soil.geometry.coordinates[0]
+                                            );
+                                        }}
+                                    >
+                                        Показать на карте
+                                    </Card.Link>
+                                </Card.Body>
+                            </Card>
+                        ))}
+                    </CardColumns>
                 </div>
                 <Map
                     onCreated={(map) => {

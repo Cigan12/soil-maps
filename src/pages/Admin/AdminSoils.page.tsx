@@ -9,6 +9,7 @@ import {
     APIDeleteSoil,
     APIPostCreateSoil,
 } from '../../api/SoilsAPI/SoilsAPI.util';
+import { Link } from 'react-router-dom';
 
 export const AdminSoilsPage: React.FC = () => {
     const [modal, setModal] = useState(false);
@@ -46,6 +47,12 @@ export const AdminSoilsPage: React.FC = () => {
         <div className="admin-page">
             <Navbar bg="primary" variant="dark">
                 <Navbar.Brand href="#home">Панель администратора </Navbar.Brand>
+                <Link className={SAdmin.navlink} to="/admin">
+                    Участки
+                </Link>
+                <Link className={SAdmin.navlink} to="/admin/soils">
+                    Почвы
+                </Link>
                 <Button variant="secondary" onClick={toggleModal}>
                     Добавить почвы
                 </Button>
@@ -64,7 +71,7 @@ export const AdminSoilsPage: React.FC = () => {
                         <tr key={soil.id}>
                             <td>{index + 1}</td>
                             <td>{soil.name}</td>
-                            <td>{soil.properties.PODTYP}</td>
+                            <td>{soil.properties.LOCATION}</td>
                             <td>
                                 <Button
                                     onClick={handleDelete.bind(
